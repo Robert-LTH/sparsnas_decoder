@@ -21,7 +21,7 @@ ENV MQTT_PORT=${MQTT_PORT:-1883}
 ENV MQTT_USERNAME=$MQTT_USERNAME
 ENV MQTT_PASSWORD=$MQTT_PASSWORD
 ENV SPARSNAS_DECODE=/usr/bin/sparsnas_decode
-ENV SPARSNAS_SENSOR_ID=${SPARSNAS_SENSOR_ID:0}
+ENV SPARSNAS_SENSOR_ID=${SPARSNAS_SENSOR_ID:-0}
 ENV SPARSNAS_PULSES_PER_KWH=1000
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
