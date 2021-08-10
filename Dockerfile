@@ -11,7 +11,6 @@ RUN apk add --no-cache g++ mosquitto-dev && \
 
 FROM alpine:edge
 
-ARG SENSORS
 ARG MQTT_HOST
 ARG MQTT_PORT
 ARG MQTT_USERNAME
@@ -20,8 +19,6 @@ ENV MQTT_HOST=${MQTT_HOST:-localhost}
 ENV MQTT_PORT=${MQTT_PORT:-1883}
 ENV MQTT_USERNAME=$MQTT_USERNAME
 ENV MQTT_PASSWORD=$MQTT_PASSWORD
-
-RUN : "${SENSORS:?Build argument 'SENSORS' needs to be set and non-empty.}"
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
       rtl-sdr \
