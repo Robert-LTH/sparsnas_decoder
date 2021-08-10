@@ -23,7 +23,6 @@ ENV MQTT_PASSWORD=$MQTT_PASSWORD
 ENV SPARSNAS_DECODE=/usr/bin/sparsnas_decode
 ENV SPARSNAS_SENSOR_ID=${SPARSNAS_SENSOR_ID:0}
 ENV SPARSNAS_PULSES_PER_KWH=1000
-ENV RTL_SDR=(/usr/bin/rtl_sdr -f 868000000 -s 1024000 -g 40 -)
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
       rtl-sdr \
