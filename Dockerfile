@@ -15,10 +15,15 @@ ARG MQTT_HOST
 ARG MQTT_PORT
 ARG MQTT_USERNAME
 ARG MQTT_PASSWORD
+ARG SPARSNAS_SENSOR_ID
 ENV MQTT_HOST=${MQTT_HOST:-localhost}
 ENV MQTT_PORT=${MQTT_PORT:-1883}
 ENV MQTT_USERNAME=$MQTT_USERNAME
 ENV MQTT_PASSWORD=$MQTT_PASSWORD
+ENV SPARSNAS_DECODE=/usr/bin/sparsnas_decode
+ENV SPARSNAS_SENSOR_ID=${SPARSNAS_SENSOR_ID:0}
+ENV SPARSNAS_PULSES_PER_KWH=1000
+ENV RTL_SDR=(/usr/bin/rtl_sdr -f 868000000 -s 1024000 -g 40 -)
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
       rtl-sdr \
@@ -27,7 +32,5 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/te
 
 COPY --from=BUILD_ENV /build/sparsnas_decode /usr/bin/
 COPY sparsnas.sh /
-
-RUN sed -i "s/^SENSORS=.*/SENSORS=(${SENSORS})/" /sparsnas.sh
 
 ENTRYPOINT ["/sparsnas.sh"]
